@@ -50,7 +50,7 @@ public class OrderItem extends DomainObject {
     }
 
     @Transient
-    public int getPrice() {
+    public double getPrice() {
         return menuItem.getPrice() * quantity;
     }
 }
