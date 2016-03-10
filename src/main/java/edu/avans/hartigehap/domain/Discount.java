@@ -7,4 +7,6 @@ public interface Discount {
 	public Date getPeriodEnd();
 	public void setDiscount(Discount discount);
 	public double getDiscount();
+	public void setPeriodStart(Date date);
+	public void setPeriodEnd(Date date);
 }

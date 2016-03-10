@@ -6,7 +6,7 @@ public class HolidayDiscount implements Discount{
 
 	public Date periodstart;
 	public Date periodend;
-	public double discount;
+	public double discount = 1;
 	public HolidayDiscount discounts;
 	
 	public HolidayDiscount(Discount discount){
@@ -20,17 +20,29 @@ public class HolidayDiscount implements Discount{
 
 	@Override
 	public Date getPeriodStart() {
-		return discounts.periodstart;
+		return periodstart;
 	}
 
 	@Override
 	public Date getPeriodEnd() {
-		return discounts.periodend;
+		return periodend;
 	}
 
 	@Override
 	public double getDiscount() {
-		return discounts.discount;
+		return discount;
+	}
+
+	@Override
+	public void setPeriodStart(Date date) {
+		periodstart = date;
+		
+	}
+
+	@Override
+	public void setPeriodEnd(Date date) {
+		periodend = date;
+		
 	}
 
 }
