@@ -2,7 +2,7 @@ package edu.avans.hartigehap.service;
 
 import com.sun.jna.Library.Handler;
 
-import edu.avans.hartigehap.domain.Order;
+import edu.avans.hartigehap.domain.MenuItem;
 
 public abstract class MenuItemHandler {
 
@@ -14,6 +14,6 @@ public abstract class MenuItemHandler {
 		
 	}
 	
-	public abstract double getTotalPrice(Order order);		
-
+	public abstract double getPrice(MenuItem item);
+	
 }

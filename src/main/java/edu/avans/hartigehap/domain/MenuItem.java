@@ -52,8 +52,7 @@ public abstract class MenuItem extends DomainObjectNaturalId {
     private double price;
     
     public boolean discountable = false;
-    public boolean hasDiscount;
-    public Discount discount = null;
+    public boolean hasDiscount = false;
 
     // no cascade
     @ManyToMany
@@ -63,11 +62,6 @@ public abstract class MenuItem extends DomainObjectNaturalId {
         super(id);
         this.imageFileName = imageFileName;
         this.price = price;
-        if(discount == null){
-        	hasDiscount = false;
-        }else{
-        	hasDiscount = true;
-        }
 
     }
 

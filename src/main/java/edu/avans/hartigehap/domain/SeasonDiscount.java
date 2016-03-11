@@ -6,7 +6,7 @@ public class SeasonDiscount implements Discount {
 
 	public Date periodstart;
 	public Date periodend;
-	public double discount = 1;
+	public double discount;
 	public SeasonDiscount discounts;
 	
 	public SeasonDiscount(Discount discount){
@@ -15,12 +15,12 @@ public class SeasonDiscount implements Discount {
 	
 	@Override
 	public Date getPeriodStart() {
-		return periodstart;
+		return discounts.periodstart;
 	}
 
 	@Override
 	public Date getPeriodEnd() {
-		return periodend;
+		return discounts.periodend;
 	}
 
 	@Override
@@ -30,19 +30,7 @@ public class SeasonDiscount implements Discount {
 
 	@Override
 	public double getDiscount() {
-		return discount;
-	}
-
-	@Override
-	public void setPeriodStart(Date date) {
-		periodstart = date;
-		
-	}
-
-	@Override
-	public void setPeriodEnd(Date date) {
-		periodend = date;
-		
+		return discounts.discount;
 	}
 
 }
