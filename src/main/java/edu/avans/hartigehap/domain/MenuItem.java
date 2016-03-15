@@ -49,11 +49,7 @@ public abstract class MenuItem extends DomainObjectNaturalId {
 
     // JPA is case sensitive: the corresponding column name will be in small
     // caps "price"
-    private double price;
-    
-    public boolean discountable = false;
-    public boolean hasDiscount;
-    public Discount discount = null;
+    private int price;
 
     // no cascade
     @ManyToMany
@@ -63,11 +59,6 @@ public abstract class MenuItem extends DomainObjectNaturalId {
         super(id);
         this.imageFileName = imageFileName;
         this.price = price;
-        if(discount == null){
-        	hasDiscount = false;
-        }else{
-        	hasDiscount = true;
-        }
 
     }
 

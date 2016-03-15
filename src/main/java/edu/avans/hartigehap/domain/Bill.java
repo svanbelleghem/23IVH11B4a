@@ -22,8 +22,6 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import edu.avans.hartigehap.service.MenuItemHandler;
-
 /**
  * 
  * @author Erco
@@ -66,8 +64,6 @@ public class Bill extends DomainObject {
     // bidirectional one-to-many relationship
     @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
     private Customer customer;
-    
-    private MenuItemHandler handler;
 
     public Bill() {
         billStatus = BillStatus.CREATED;
@@ -98,8 +94,13 @@ public class Bill extends DomainObject {
      * @return
      */
     @Transient
-    public double getPriceAllOrders() {
-        return handler.getTotalPrice(currentOrder);
+    public int getPriceAllOrders() {
+        int price = 0;
+        Iterator<Order> orderIterator = orders.iterator();
+        while (orderIterator.hasNext()) {
+            price += orderIterator.next().getPrice();
+        }
+        return price;
     }
 
     /**
