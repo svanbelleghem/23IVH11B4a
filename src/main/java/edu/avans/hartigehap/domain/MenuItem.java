@@ -55,6 +55,9 @@ public abstract class MenuItem extends DomainObjectNaturalId {
     @ManyToMany
     private Collection<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
 
+	public boolean discountable = false;
+	public boolean hasDiscount = false;
+
     public MenuItem(String id, String imageFileName, int price) {
         super(id);
         this.imageFileName = imageFileName;

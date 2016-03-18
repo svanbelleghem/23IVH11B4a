@@ -27,6 +27,8 @@ public class WaiterController {
     private BillService billService;
     @Autowired
     private OrderService orderService;
+    
+    private MenuItemHandler handler;
 
     @RequestMapping(value = "/restaurants/{restaurantName}/waiter", method = RequestMethod.GET)
     public String showWaiter(@PathVariable("restaurantName") String restaurantName, Model uiModel) {

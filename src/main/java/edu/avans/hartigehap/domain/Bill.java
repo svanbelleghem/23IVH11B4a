@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.logging.Handler;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +19,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.swing.JOptionPane;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import edu.avans.hartigehap.service.DiscountItemHandler;
+import edu.avans.hartigehap.service.MenuItemHandler;
+import edu.avans.hartigehap.service.RegularHandler;
 
 /**
  * 
@@ -35,11 +41,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @ToString(callSuper = true, includeFieldNames = true, of = { "billStatus", "currentOrder", "orders" })
 public class Bill extends DomainObject {
     private static final long serialVersionUID = 1L;
-
+    
     public enum BillStatus {
         CREATED, SUBMITTED, PAID
     }
-
+    
     // represented in database as integer
     @Enumerated(EnumType.ORDINAL)
     private BillStatus billStatus;
@@ -64,12 +70,21 @@ public class Bill extends DomainObject {
     // bidirectional one-to-many relationship
     @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
     private Customer customer;
+    
+    @Transient
+    private MenuItemHandler handler;
+    
+    @Transient
+    private DiscountItemHandler dhandler;
+    
+    @Transient
+    private RegularHandler rhandler;
 
     public Bill() {
         billStatus = BillStatus.CREATED;
         currentOrder = new Order();
         currentOrder.setBill(this);
-        orders.add(currentOrder);
+        orders.add(currentOrder);    	
     }
 
     /* business logic */
@@ -94,14 +109,23 @@ public class Bill extends DomainObject {
      * @return
      */
     @Transient
-    public int getPriceAllOrders() {
-        int price = 0;
+    public double getPriceAllOrders() {
+        double price = 0;
         Iterator<Order> orderIterator = orders.iterator();
         while (orderIterator.hasNext()) {
             price += orderIterator.next().getPrice();
         }
+        
         return price;
     }
+    
+//    @Transient
+//    public double getPriceAllOrders(){   
+//    	MenuItemHandler h1 = new RegularHandler();
+//    	MenuItemHandler h2 = new DiscountItemHandler();
+//    	h1.setSuccessor(h2);
+//    	return h1.getPrice(orders);
+//    }
 
     /**
      * price of the *submitted or successive state* orders only
