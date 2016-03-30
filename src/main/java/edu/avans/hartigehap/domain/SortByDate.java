@@ -18,8 +18,7 @@ public class SortByDate extends OrderDuration {
 		Collection<OrderDuration> list = getList();
 
 		// Sort List by Endtime
-		Collection<OrderDuration> sorted = (Collection<OrderDuration>) list.stream()
-				.sorted((e1, e2) -> e1.getEndTime().compareTo(e2.getEndTime()));
+		Collection<OrderDuration> sorted = (Collection<OrderDuration>) list.stream().sorted((e1, e2) -> e1.getEndTime().compareTo(e2.getEndTime()));
 
 		// Create list
 		createList(sorted);

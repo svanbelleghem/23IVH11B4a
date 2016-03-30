@@ -29,7 +29,6 @@ import lombok.ToString;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-
 public class Review extends DomainObject {
 
 	/**

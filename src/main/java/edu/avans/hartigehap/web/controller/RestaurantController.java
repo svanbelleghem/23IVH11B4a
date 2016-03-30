@@ -25,6 +25,12 @@ public class RestaurantController {
     @RequestMapping(value = { "/", "/restaurants" }, method = RequestMethod.GET)
     public String listRestaurants(Model uiModel) {
 
+//    	Time timer = new Time();
+//    	
+//    	if(timer.isCreated() ==  0){
+//    		timer.schedule();
+//    	}
+//    	
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
 

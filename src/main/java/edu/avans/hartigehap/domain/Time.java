@@ -4,37 +4,42 @@
 package edu.avans.hartigehap.domain;
 
 import java.util.Observable;
-import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 
 /**
  * @author Sander van Belleghem
  *
  */
 public class Time extends Observable {
+
+	private int created;
 	
-	public Time(){
-		
+	public Time() {
+    	created = 0;
 	}
 	
-	/**
-	 * Check if time is passed and if so, notify others
-	 */
-	public void startInterval(){
-	
-		/**
-		 * Check if time is passed, if so setChanged and notifyObservers
-		 */
-		setChanged();
-		notifyObservers();
-		
+	public void schedule(){
+		Timer timer = new Timer ();
+		TimerTask hourlyTask = new TimerTask () {
+		    @Override
+		    public void run () {
+		    	
+		    	created = 1;
+		    	
+		    	setChanged();
+				notifyObservers();
+		    }
+		};
+
+		// Schedule the task to run starting now and then every hour...
+		timer.schedule(hourlyTask, 0l, 1000*60*60);
 	}
 	
-	/**
-	 * Return current time
-	 *
-	 */
-	public void getCurrentTime(){
-		
+	public int isCreated(){
+		return created;
 	}
-	
 }
