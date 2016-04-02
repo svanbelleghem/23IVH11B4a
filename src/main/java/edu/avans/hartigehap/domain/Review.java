@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -35,23 +38,23 @@ public class Review extends DomainObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-    public enum Rating {
-        FOODRATING, SERVICERATING
-    }
 
-	public Review(Restaurant res) {
-		// Convert String to Long
-		restaurantId = Long.parseLong(res.getId());
+	public enum Rating {
+		FOODRATING, SERVICERATING
 	}
-    
-    // represented in database as integer
-    @Enumerated(EnumType.ORDINAL)
-    private Rating rating;
-	
+
+	public Review() {
+		
+	}
+
+	// represented in database as integer
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "rating")
+	private Rating rating;
+
 	@Column(name = "datetime")
 	private Date datetime;
-	
+
 	@Column(name = "restaurantId")
 	private Long restaurantId;
 }

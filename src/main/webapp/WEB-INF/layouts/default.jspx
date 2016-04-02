@@ -27,6 +27,7 @@
     <spring:url value="/${app_css_custom}" var="app_css_custom_url" />
     <link rel="stylesheet" type="text/css" media="screen" href="${app_css_url}" />
     <link rel="stylesheet" type="text/css" media="screen" href="${app_css_custom_url}" />
+   
 
     <!-- Get the user locale from the page context (it was set by Spring MVC's locale resolver) -->
     <c:set var="userLocale">
@@ -42,7 +43,7 @@
     <script type="text/javascript" src="${bootstrap_js_url}"><jsp:text /></script>
     <script type="text/javascript" src="${bootstrap_image_preview_url}"><jsp:text/></script>
     <script type="text/javascript" src="${bootstrap_datepicker_url}"><jsp:text/></script>
-    <script type="text/javascript" src="${bootstrap_chooser_url}"><jsp:text/></script>
+    <script type="text/javascript" src="${bootstrap_chooser_url}"><jsp:text/></script>    
 </head>
     <body>
         <div id="wrap">

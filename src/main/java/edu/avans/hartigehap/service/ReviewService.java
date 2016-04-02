@@ -18,8 +18,6 @@ public interface ReviewService {
 
 	Review findById(Long id);
 
-	List<Review> findByDate(Date datetime);
-
 	Review save(Review review);
 	
 }

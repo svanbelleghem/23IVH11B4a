@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 
 @Controller
 @Slf4j
-public class RestaurantController {
+public class RestaurantController extends ReviewReporter {
     
     @Autowired
     private RestaurantService restaurantService;
@@ -25,12 +25,6 @@ public class RestaurantController {
     @RequestMapping(value = { "/", "/restaurants" }, method = RequestMethod.GET)
     public String listRestaurants(Model uiModel) {
 
-//    	Time timer = new Time();
-//    	
-//    	if(timer.isCreated() ==  0){
-//    		timer.schedule();
-//    	}
-//    	
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
 
@@ -38,6 +32,14 @@ public class RestaurantController {
         Restaurant restaurant = restaurantService.fetchWarmedUp(RestaurantPopulatorService.HARTIGEHAP_RESTAURANT_NAME);
         uiModel.addAttribute("restaurant", restaurant);
 
+    	Time timer = new Time();
+    	ReviewReporter reviewRepo = new ReviewReporter();
+    	reviewRepo.setup(timer);
+    	
+    	if(timer.isCreated() ==  0){
+    		timer.schedule();
+    	}	
+        
         return "hartigehap/listrestaurants";
     }
 
@@ -61,5 +63,4 @@ public class RestaurantController {
         log.info("RestaurantPopulatorServiceImpl.createRestaurantsWithInventory() called");
         restaurantPopulatorService.createRestaurantsWithInventory();
     }
-
 }

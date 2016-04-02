@@ -35,6 +35,11 @@
 	</div>
 
 	<div class="row">
+		<spring:url var="showReviewForm" value="/review" />
+		<a href="${showReviewForm}" class="btn">Write Review</a>
+	</div>
+
+	<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">${labelDiningTables}</h3>
