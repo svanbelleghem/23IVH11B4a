@@ -20,7 +20,6 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    @Transactional(readOnly = true)
     public List<Restaurant> findAll() {
         // MySQL and H2 return the restaurants of findAll() in different order
         // sorting the result makes the behavior less database vendor dependent

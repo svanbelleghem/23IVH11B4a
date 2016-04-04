@@ -3,14 +3,16 @@
  */
 package edu.avans.hartigehap.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+import org.springframework.transaction.annotation.Transactional;
+
+>>>>>>> 5f36aaff86c8f298f4bc3ae70cc6d4b38042c48b
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
 import com.google.common.collect.Lists;
 
 import edu.avans.hartigehap.domain.Review;
@@ -23,30 +25,25 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 
-@Service("reviewService")
 @Repository
 @Transactional
 public class ReviewServiceImpl implements ReviewService {
 
-	@SuppressWarnings("unused")
 	@Autowired 
 	private ReviewRepository reviewRepository;
 
-	@Override
 	public List<Review> findAll() {
-		// MySQL and H2 return the restaurants of findAll() in different order
+		// MySQL and H2 return the reviews of findAll() in different order
         // sorting the result makes the behavior less database vendor dependent
         Sort sort = new Sort(Sort.Direction.ASC, "id");
         return Lists.newArrayList(reviewRepository.findAll(sort));
 	}
 
-	@Override
 	@Transactional(readOnly = true)
-	public Review findById(Long review) {
+	public Review findById(String review) {
         return reviewRepository.findOne(review);
     }
 
-	@Override
 	public Review save(Review review) {
 		return reviewRepository.save(review);
 	}

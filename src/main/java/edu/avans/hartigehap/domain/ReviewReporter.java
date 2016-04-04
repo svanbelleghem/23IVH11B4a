@@ -9,14 +9,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -29,20 +25,16 @@ import lombok.Setter;
  *
  */
 
-@Table(name = "Review")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
 public class ReviewReporter implements Observer {
 
-	@ManyToMany
-	private List<Review> reviews = new ArrayList<Review>();
-
+	private Review review;
 	private File file;
 	Observable observable;
 
 	public ReviewReporter() {
-
+		review = new Review();
 	}
 
 	public void setup(Observable observable) {
@@ -65,16 +57,12 @@ public class ReviewReporter implements Observer {
 
 	public void openFile(String fileExtension) {
 
-		System.out.println(fileExtension);
-
 		// Get current datetime
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HHmmss");
 		Date date = new Date();
 
 		// Create Filename
 		String filename = "export_" + dateFormat.format(date);
-
-		System.out.println(filename);
 
 		// Recieve path to temp folder
 		File tempDir = new File(System.getProperty("java.io.tmpdir"));
@@ -88,11 +76,33 @@ public class ReviewReporter implements Observer {
 	}
 
 	public void writeFile() {
-
-		List<Review> reviews = getReviews();
+		
+		// WORDT NIET GEVULD MET DATA UIT DATABASE!
+		List<Review> reviews = review.getReviews(new ReviewSortedByDateAscending());
+		
+		if(reviews != null){
+			System.out.println(reviews.size());
+		} else {
+			System.out.println("niet oK");
+		}
+		
+		for (Review r : reviews) {
+			System.out.println("mooi");
+			
+			System.out.println("DateTime: " + r.getDatetime());
+			System.out.println("\n");
+			System.out.println("RestaurantId: " + r.getRestaurantId());
+			System.out.println("\n");
+			System.out.println("Rating: " + r.getRating());
+			System.out.println("\n");
+			System.out.println("\n");
+			System.out.println("*////////////////////*");
+			System.out.println("\n");
+			System.out.println("\n");
+		}
 
 		PrintWriter writer = null;
-		
+
 		try {
 			writer = new PrintWriter(new FileWriter(getFile()));
 
@@ -100,8 +110,6 @@ public class ReviewReporter implements Observer {
 				writer.println("DateTime: " + r.getDatetime());
 				writer.println("\n");
 				writer.println("RestaurantId: " + r.getRestaurantId());
-				writer.println("\n");
-				writer.println("ReviewId: " + r.getId());
 				writer.println("\n");
 				writer.println("Rating: " + r.getRating());
 				writer.println("\n");
@@ -118,10 +126,6 @@ public class ReviewReporter implements Observer {
 			if (writer != null)
 				writer.close();
 		}
-	}
-
-	public List<Review> getReviews() {
-		return reviews;
 	}
 
 	public File getFile() {
