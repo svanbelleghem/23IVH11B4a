@@ -1,5 +1,7 @@
 package edu.avans.hartigehap.domain;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -108,24 +110,28 @@ public class Bill extends DomainObject {
      * 
      * @return
      */
+//    @Transient
+//    public double getPriceAllOrders() {
+//        double price = 0;
+//        Iterator<Order> orderIterator = orders.iterator();
+//        while (orderIterator.hasNext()) {
+//            price += orderIterator.next().getPrice();
+//        }
+//        
+//        return price;
+//    }
+    
     @Transient
-    public double getPriceAllOrders() {
-        double price = 0;
-        Iterator<Order> orderIterator = orders.iterator();
-        while (orderIterator.hasNext()) {
-            price += orderIterator.next().getPrice();
-        }
-        
+    public double getPriceAllOrders(){   
+    	MenuItemHandler h1 = new RegularHandler();
+    	MenuItemHandler h2 = new DiscountItemHandler();
+    	double price = 0;
+    	h1.setSuccessor(h2);
+    	
+        price = h1.getPrice(orders) + h2.getPriceNoOrder();    		
+   
         return price;
     }
-    
-//    @Transient
-//    public double getPriceAllOrders(){   
-//    	MenuItemHandler h1 = new RegularHandler();
-//    	MenuItemHandler h2 = new DiscountItemHandler();
-//    	h1.setSuccessor(h2);
-//    	return h1.getPrice(orders);
-//    }
 
     /**
      * price of the *submitted or successive state* orders only

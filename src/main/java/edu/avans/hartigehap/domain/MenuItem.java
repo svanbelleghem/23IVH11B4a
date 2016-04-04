@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -54,9 +55,10 @@ public abstract class MenuItem extends DomainObjectNaturalId {
     // no cascade
     @ManyToMany
     private Collection<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
-
-	public boolean discountable = false;
+	
 	public boolean hasDiscount = false;
+	@OneToOne
+	public Discount discount;
 
     public MenuItem(String id, String imageFileName, int price) {
         super(id);

@@ -24,7 +24,7 @@
 	<div class="row">
 		<h1>${labelWaiterSubsystem}</h1>
 		<h2 class="restaurant muted">${labelRestaurant} <a href="${showRestaurant}">${restaurant.id}</a></h2>
-
+		
 		<c:if test="${not empty message}">
 			<div id="message" class="alert alert-info ${message.type}">${message.message}</div>
 		</c:if>
@@ -91,6 +91,24 @@
 					</tbody>
 				</table>
 			</c:if>
-		</div>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="panel panel-default">
+			<table class="table">
+		<tr>
+			<td>Discount Name</td>
+			<td>Discount Percentage</td>
+			<td>Period Start</td>
+			<td>Period End</td>
+		</tr>
+		<tr>
+			<td>Christmas Discount</td>
+			<td>0.8</td>
+			<td>2016-04-01</td>
+			<td>2016-04-29</td>
+		</tr>
+	</table>
+	</div>
 	</div>
 </div>

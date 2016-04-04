@@ -18,4 +18,6 @@ public abstract class MenuItemHandler {
 	}
 	
 	public abstract double getPrice(Collection<Order> order);
+	
+	public abstract double getPriceNoOrder();
 }

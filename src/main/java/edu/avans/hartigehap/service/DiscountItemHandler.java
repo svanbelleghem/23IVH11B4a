@@ -12,37 +12,44 @@ import edu.avans.hartigehap.domain.OrderItem;
 
 public class DiscountItemHandler extends MenuItemHandler {
 
-	public Discount discount;
-	public Date currentDate = new Date();
-	public OrderItem orderitem = new OrderItem();
+	public Collection<OrderItem> orderitems = new ArrayList<OrderItem>();
+	public Collection<MenuItem> menuitems = new ArrayList<MenuItem>();
+	public double price = 0;
+	int quantity = 1;
 	
 	@Override
-	public double getPrice(Collection<Order> order) {
-		if(orderitem.getMenuItem().discountable == true){
-			if(orderitem.getMenuItem().hasDiscount == true && discount.getPeriodEnd().before(currentDate) && discount.getPeriodStart().after(currentDate)){
-				
-				double price = 0;
-				Collection<Order> orders = new ArrayList<Order>();
-				Iterator<Order> orderIterator = orders.iterator();
-				while(orderIterator.hasNext()){
-					if(orderitem.getMenuItem().discountable == true)
-					price += orderIterator.next().getPrice();
+	public double getPrice(Collection<Order> order) throws StackOverflowError {	
+		Iterator<Order> orderIterator = order.iterator();
+		
+		while(orderIterator.hasNext()){
+			orderitems = orderIterator.next().getOrderItems();
+			
+			for(OrderItem orderitem : orderitems){
+				if(orderitems.size() > 1){
+					menuitems.add(orderitem.getMenuItem());
+				}else{
+					menuitems.add(orderitem.getMenuItem());
+					quantity = orderitem.getQuantity();
 				}
-				return price * discount.discount;
-				
-			}else{
-				
-				double price = 0;
-				Collection<Order> orders = new ArrayList<Order>();
-				Iterator<Order> orderIterator = orders.iterator();
-				while(orderIterator.hasNext()){
-					price += orderIterator.next().getPrice();
+					
 				}
-				return price;
+		
+			for(MenuItem item : menuitems){
+				Date date = new Date();
+				if(item.discount != null && item.discount.periodEnd.after(date) && item.discount.periodStart.before(date)){
+					price += (item.getPrice() * item.discount.discount) * quantity;
+				}else{	
+					return 0;
+				}
 			}
-		}else{
-			return 0;
+			
+			orderIterator.next();
 		}
+		return price;
+	}
+	
+	public double getPriceNoOrder(){
+		return price;
 	}
 
 }

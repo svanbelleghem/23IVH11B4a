@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service("restaurantPopulatorService")
@@ -27,6 +28,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private MenuItemRepository menuItemRepository;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private discountRepository discountrepository;
 
     private List<Meal> meals = new ArrayList<>();
     private List<FoodCategory> foodCats = new ArrayList<>();
@@ -73,6 +76,11 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
+        
+        // create Discounts 
+        createHolidayDiscount("ChristmasDiscount", 0.8, new Date(), new Date());
+        createSeasonDiscount("SpringDiscount", 0.8, new Date(), new Date());
+        createHandmadeDiscount("WeekendDiscount", 0.8, new Date(), new Date());
     }
 
     private void createFoodCategory(String tag) {
@@ -101,6 +109,21 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         drink.addFoodCategories(foodCats);
         drinks.add(drink);
     }
+    
+    public void createHolidayDiscount(String id, double discounts, Date periodStart, Date periodEnd){
+    	Discount discount = new HolidayDiscount(id, discounts, periodStart, periodEnd);
+    	 discount = discountrepository.save(discount);
+    }
+    
+    public void createHandmadeDiscount(String id, double discounts, Date periodStart, Date periodEnd){
+    	Discount discount = new HandmadeDiscount(id, discounts, periodStart, periodEnd);
+	   	 discount = discountrepository.save(discount);
+   }
+    
+    public void createSeasonDiscount(String id, double discounts, Date periodStart, Date periodEnd){
+    	Discount discount = new SeasonDiscount(id, discounts, periodStart, periodEnd);
+	   	 discount = discountrepository.save(discount);
+   }
 
     private void createCustomer(String firstName, String lastName, DateTime birthDate, int partySize,
             String description, byte[] photo) {

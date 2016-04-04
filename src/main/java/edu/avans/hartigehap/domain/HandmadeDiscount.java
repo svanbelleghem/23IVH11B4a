@@ -24,6 +24,8 @@ import lombok.ToString;
 @NoArgsConstructor
 public class HandmadeDiscount extends Discount{
 	
+	private static final long serialVersionUID = 1L;
+	
 	public HandmadeDiscount(String id, double discount, Date periodStart, Date periodEnd){
 		super(id, discount, periodStart, periodEnd);
 	}
