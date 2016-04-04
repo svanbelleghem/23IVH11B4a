@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.avans.hartigehap.domain.Customer;
 import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
+import org.springframework.stereotype.Component;
 
 public class CustomerServiceTest extends AbstractTransactionRollbackTest {
 
@@ -19,6 +20,7 @@ public class CustomerServiceTest extends AbstractTransactionRollbackTest {
     private static final String CUSTOMER_LAST_NAME = "Happerdepap";
     private static final String CUSTOMER_FIRST_NAME2 = "Eibert";
     private static final String CUSTOMER_LAST_NAME2 = "Draisma";
+
 
     @Autowired
     private CustomerService customerService;

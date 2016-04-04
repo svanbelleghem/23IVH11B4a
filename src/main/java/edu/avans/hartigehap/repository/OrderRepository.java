@@ -11,17 +11,8 @@ public interface OrderRepository extends PagingAndSortingRepository<Order, Long>
     // in this case all orders for which:
     // order.getOrderStatus() == orderStatus
     // AND
-    // order.getBill().getDiningTable().getRestaurant() == restaurant
-    List<Order> findByOrderStatusAndBillDiningTableRestaurant(Order.OrderStatus orderStatus, Restaurant restaurant,
+     //order.getBill().getDiningTable().getRestaurant() == restaurant
+    List<Order> findByOrderStatusAndBillDiningTableRestaurant(State.StateType orderStatus, Restaurant restaurant,
             Sort sort);
-
-    // compare to:
-    // @NamedQuery(
-    // name = "Order.findSubmittedOrders",
-    // query = "SELECT o FROM Order o " +
-    // "WHERE o.orderStatus =
-    // edu.avans.hartigehap.domain.Order$OrderStatus.SUBMITTED " +
-    // "AND o.bill.diningTable.restaurant = :restaurant " +
-    // "ORDER BY o.submittedTime")
 
 }

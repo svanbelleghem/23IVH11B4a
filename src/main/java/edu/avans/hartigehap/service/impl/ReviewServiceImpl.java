@@ -6,8 +6,6 @@ package edu.avans.hartigehap.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
@@ -18,6 +16,7 @@ import com.google.common.collect.Lists;
 import edu.avans.hartigehap.domain.Review;
 import edu.avans.hartigehap.repository.ReviewRepository;
 import edu.avans.hartigehap.service.ReviewService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Sander van Belleghem

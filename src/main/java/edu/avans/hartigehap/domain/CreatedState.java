@@ -3,17 +3,16 @@ package edu.avans.hartigehap.domain;
 /**
  * Created by Edem on 17-Mar-16.
  */
-public class CreatedState {
+public class CreatedState extends State {
 
-
-
-    private String stateName = "Created";
-    private boolean isCommentAllowed = true;
     private CreatedState state;
 
-    public boolean getCommentAllowed(){
-        return isCommentAllowed;
+    public CreatedState() {
+        super(StateType.CREATED);
     }
-    public CreatedState getState(){return state;}
+
+    public void setState(CreatedState state) {
+        this.state = state;
+    }
 
 }

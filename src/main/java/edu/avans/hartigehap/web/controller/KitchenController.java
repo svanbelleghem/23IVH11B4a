@@ -97,7 +97,7 @@ public class KitchenController {
             orderService.planOrder(order);
         } catch (StateException e) {
             log.error("Internal error has occurred! Order " + Long.valueOf(order.getId())
-                    + "has not been changed to planned state!", e);
+                    + "has not been changed to planned stateType!", e);
         }
     }
 
@@ -106,7 +106,7 @@ public class KitchenController {
             orderService.orderPrepared(order);
         } catch (StateException e) {
             log.error("Internal error has occurred! Order " + Long.valueOf(order.getId())
-                    + "has not been changed to prepared state!", e);
+                    + "has not been changed to prepared stateType!", e);
         }
     }
 

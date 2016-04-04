@@ -116,7 +116,7 @@ public class WaiterController {
             orderService.orderServed(order);
         } catch (StateException e) {
             log.error("Internal error has occurred! Order " + Long.valueOf(order.getId())
-                    + "has not been changed to served state!", e);
+                    + "has not been changed to served stateType!", e);
         }
     }
     
@@ -144,7 +144,7 @@ public class WaiterController {
             billService.billHasBeenPaid(bill);
         } catch (StateException e) {
             log.error("Internal error has occurred! Order " + Long.valueOf(bill.getId())
-                    + "has not been changed to served state!", e);
+                    + "has not been changed to served stateType!", e);
         }
     }
 

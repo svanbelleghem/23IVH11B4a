@@ -105,6 +105,19 @@ public class DiningTableController {
 
     }
 
+    @RequestMapping(value="/comment", method=RequestMethod.POST)
+    public String commentSubmit(@ModelAttribute Comment comment, Model model, Order order) {
+        if (order.getOrderState().getStateType().isCommentable() == true){
+            model.addAttribute("comment", new Comment());
+        return "comment";
+
+        }
+       else  {
+            return "Comment niet beschikbaar";
+        }
+
+    }
+
     private String submitBill(String diningTableId, RedirectAttributes redirectAttributes, Model uiModel,
             Locale locale) {
         

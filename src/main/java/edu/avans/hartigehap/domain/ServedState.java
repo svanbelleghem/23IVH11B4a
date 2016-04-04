@@ -1,19 +1,20 @@
 package edu.avans.hartigehap.domain;
 
+import javax.xml.stream.events.StartElement;
+
 /**
  * Created by Edem on 17-Mar-16.
  */
-public class ServedState {
+public class ServedState extends State{
 
-
-
-    private String stateName = "Served";
-    private boolean isCommentAllowed = false;
     private ServedState state;
 
-    public boolean getCommentAllowed(){
-        return isCommentAllowed;
+    public ServedState() {
+        super(StateType.SERVED);
     }
-    public ServedState getState(){return state;}
+
+    public void setState(ServedState state) {
+        this.state = state;
+    }
 
 }

@@ -45,6 +45,8 @@ public class CustomerController {
         return "hartigehap/listcustomers";
     }
 
+
+
     @RequestMapping(value = "/restaurants/{restaurantName}/customers/{id}", method = RequestMethod.GET)
     public String showCustomer(@PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id,
             Model uiModel) {

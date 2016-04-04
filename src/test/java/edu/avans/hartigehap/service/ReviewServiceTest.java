@@ -22,7 +22,7 @@ import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
  */
 public class ReviewServiceTest extends AbstractTransactionRollbackTest {
 
-	@Autowired 
+	@Autowired
 	private ReviewService reviewService;
 	
 	@Test

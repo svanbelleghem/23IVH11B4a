@@ -4,7 +4,10 @@ import java.util.List;
 
 import edu.avans.hartigehap.domain.Order;
 import edu.avans.hartigehap.domain.Restaurant;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+@Repository("orderRepositoryCustom")
 public interface OrderRepositoryCustom {
 
     // this is a custom method for which Spring cannot create an implementation

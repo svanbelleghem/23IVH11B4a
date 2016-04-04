@@ -4,7 +4,8 @@
 	 xmlns:joda="http://www.joda.org/joda/time/tags"
 	 xmlns:spring="http://www.springframework.org/tags"
 	 xmlns:form="http://www.springframework.org/tags/form"
-	 xmlns:sec="http://www.springframework.org/security/tags" version="2.0">
+	 xmlns:sec="http://www.springframework.org/security/tags" version="2.0"
+	 xmlns:th="http://www.springframework.org/tags/form">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
@@ -24,7 +25,6 @@
 	<spring:message code="label_currency" var="labelCurrency" />
 	<spring:message code="label_menu" var="labelMenu" />
 	<spring:message code="label_categorie" var="labelCategorie" />
-	<spring:message code="label_categorie_tab_text" var="labelCategorieTabText" />
 	<spring:message code="label_welcome_word" var="labelWelcomeWord" />
 	<spring:message code="label_pick_from_menu" var="labelPickFromMenu" />
 	<spring:message code="table_item" var="tableItem" />
@@ -52,6 +52,21 @@
 				</div>
 			</div>
 		</div>
+		<form action="#" th:action="@{/comment}" th:object="${comment}" method="post">
+		<div class="row">
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Comment</h3>
+		</div>
+		<div class="panel-body">
+		<div class="input-group input-group-100">
+			<input type="text" th:field="*{Comment.userComment}" />
+		</div>
+		</div>
+		</div>
+		</div>
+
+		</form>
 	</c:if>
 
 	<c:if test="${not empty diningTable.currentBill.currentOrder.orderItems}">
