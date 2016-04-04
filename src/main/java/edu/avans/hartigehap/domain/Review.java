@@ -3,24 +3,23 @@
  */
 package edu.avans.hartigehap.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import edu.avans.hartigehap.domain.Bill.BillStatus;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * @author Sander van Belleghem
@@ -38,6 +37,10 @@ public class Review extends DomainObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+//	private ;
+	
+	@OneToMany
+	private Collection<Review> reviews = new ArrayList<>();
 
 	public enum Rating {
 		FOODRATING, SERVICERATING
@@ -51,10 +54,18 @@ public class Review extends DomainObject {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "rating")
 	private Rating rating;
+	
+	private int ratingValue;
 
 	@Column(name = "datetime")
 	private Date datetime;
 
 	@Column(name = "restaurantId")
-	private Long restaurantId;
+	private String restaurantId;
+	
+	public List<Review> getReviews(RestaurantReview strategy) {
+		RestaurantReview strat = strategy;
+		System.out.println("GetReviews Called. Containing: " + reviews.size());
+		return strat.doOperation(reviews);
+	}
 }

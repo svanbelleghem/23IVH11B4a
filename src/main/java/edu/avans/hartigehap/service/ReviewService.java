@@ -3,7 +3,6 @@
  */
 package edu.avans.hartigehap.service;
 
-import java.util.Date;
 import java.util.List;
 
 import edu.avans.hartigehap.domain.Review;
@@ -13,11 +12,10 @@ import edu.avans.hartigehap.domain.Review;
  *
  */
 public interface ReviewService {
-
+	
 	List<Review> findAll();
 
-	Review findById(Long id);
+	Review findById(String id);
 
 	Review save(Review review);
-	
 }

@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 
 @Controller
 @Slf4j
-public class RestaurantController extends ReviewReporter {
+public class RestaurantController {
     
     @Autowired
     private RestaurantService restaurantService;
